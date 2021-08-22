@@ -9,6 +9,9 @@ let iconimg = document.querySelector(".icon");
 let temperatureSection = document.querySelector(".temperature");
 let temperatureSpan = document.querySelector(".temperature span");
 
+var video = document.getElementById("myVideo");
+let source = document.getElementById("source");
+
 if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(position => {
        long=position.coords.longitude;
@@ -52,6 +55,24 @@ if(navigator.geolocation){
                    
                 }
             })
+            source.setAttribute("src","./videos/sunny1.mp4");
+            video.load();
+            video.play();
+            let bgs = [{main:"Clouds",src:"./videos/cloudy.mp4",icon:"./animated/cloudy.svg"},{main:"Clear",src:"./videos/sunny1.mp4",icon:"./animated/day.svg"},{
+                main:"Rain",src:"./videos/rain.mp4",icon:"./animated/rainy-7.svg"},{main:"Drizzle",src:"./videos/rain.mp4",icon:"./animated/rainy-4.svg"},{main:"Thunderstorm",src:"./videos/thunder.mp4",icon:"./animated/thunder.svg"},{main:"Snow",src:"./videos/snowy.mp4",icon:"./animated/snowy-6.svg"}
+            ]
+            bgs.every(function(bg){
+                if(description===bg.main){
+                    iconimg.src = bg.icon;
+                    source.setAttribute("src",bg.src);
+                    video.load();
+                    video.play();
+                    return false;
+                
+                } return true;
+            })
+            
+        
         });
     });
 
